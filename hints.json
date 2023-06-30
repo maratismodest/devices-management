@@ -10,3 +10,5 @@ db.users.find({ age: { $lte: 28 } });
 db.users.updateOne({ name: "marat" }, { $set: { name: "maratka", age: 22 } });
 
 db.users.deleteOne({ age: 28 });
+
+mongodb+srv://maratismodest:Kazan2023!@maratismodest.1lt9ibq.mongodb.net/?retryWrites=true&w=majority
