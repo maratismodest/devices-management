@@ -8,12 +8,7 @@ export class Device {
   @Prop()
   uid: number;
 
-  @Prop({
-    type: String, validate: {
-      validator: (value) => Promise.resolve(value.length > 4),
-      message: "Password validation failed"
-    }
-  })
+  @Prop()
   vendor: string;
 
   @Prop()
