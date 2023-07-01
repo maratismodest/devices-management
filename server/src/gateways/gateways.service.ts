@@ -44,6 +44,16 @@ export class GatewaysService {
     }
   }
 
+  async removeDevice(id: string, deviceId: string) {
+    /** Find Gateway */
+    const gateway = await this.gatewayModel.findOne({ _id: id }).exec();
+    if (gateway) {
+      gateway.devices = gateway.devices.filter(_deviceId => deviceId !== deviceId);
+      await gateway.save();
+      return gateway;
+    }
+  }
+
   async delete(id: string) {
     const deletedGateway = await this.gatewayModel
       .findByIdAndRemove({ _id: id })

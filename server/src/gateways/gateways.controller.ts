@@ -23,6 +23,11 @@ export class GatewaysController {
     return this.gatewaysService.addDevice(id, deviceId);
   }
 
+  @Put(":id")
+  async removeDevice(@Param("id") id: string, @Body() { deviceId }: { deviceId: string }) {
+    return this.gatewaysService.removeDevice(id, deviceId);
+  }
+
   @Get()
   async findAll(): Promise<Gateway[]> {
     return this.gatewaysService.findAll();

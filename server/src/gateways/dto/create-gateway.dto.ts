@@ -14,5 +14,5 @@ export class CreateGatewayDto {
   @IsIP()
   readonly ip4: string;
 
-  readonly devices: string[];
+  readonly devices: [];
 }
