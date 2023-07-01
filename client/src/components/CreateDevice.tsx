@@ -29,13 +29,13 @@ const CreateDevice = () => {
 
       <div className="grid">
         <label htmlFor="uid">Uid</label>
-        <input id="uid" type="number" {...register("uid", { required: true })} />
+        <input id="uid" type="number" {...register("uid", { required: true })} placeholder='i.e. 12345678' />
         {errors.uid && <RequiredError />}
       </div>
 
       <div className="grid">
         <label htmlFor="vendor">Vendor</label>
-        <input id="vendor" {...register("vendor", { required: true })} />
+        <input id="vendor" {...register("vendor", { required: true })} placeholder='i.e. Mikrotik' />
         {errors.vendor && <RequiredError />}
       </div>
 

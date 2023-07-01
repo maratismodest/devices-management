@@ -3,7 +3,7 @@ import { CreateDeviceDto, Device } from "types/global";
 
 export const devicesAPI = createApi({
   reducerPath: "devicesAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_NODE }),
   tagTypes: ["Gateway", "Gateways", "Device", "Devices"],
   endpoints: (build) => ({
     fetchDevices: build.query<Device[], void>({
@@ -31,7 +31,7 @@ export const devicesAPI = createApi({
         url: `/Devices/${id}`,
         method: "DELETE"
       }),
-      invalidatesTags: ["Devices"]
+      invalidatesTags: ["Devices", "Gateways"]
     })
   })
 });

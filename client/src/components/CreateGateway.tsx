@@ -31,19 +31,19 @@ const CreateGateway = () => {
 
       <div className="grid">
         <label htmlFor="sn">Serial Number</label>
-        <input id="sn"  {...register("sn", { required: true })} />
+        <input id="sn" {...register("sn", { required: true })} placeholder="i.e. UWWD-333-2SD" />
         {errors.sn && <RequiredError />}
       </div>
 
       <div className="grid">
         <label htmlFor="name">Name</label>
-        <input id="name" {...register("name", { required: true })} />
+        <input id="name" {...register("name", { required: true })} placeholder="i.e. TP-Link 110" />
         {errors.name && <RequiredError />}
       </div>
 
       <div className="grid">
         <label htmlFor="ip4">IP-address</label>
-        <input id="ip4" {...register("ip4", { required: true })} />
+        <input id="ip4" {...register("ip4", { required: true })} placeholder="i.e. 8.8.8.8" />
         {errors.ip4 && <RequiredError />}
       </div>
 

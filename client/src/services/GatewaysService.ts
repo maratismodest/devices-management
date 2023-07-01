@@ -3,7 +3,7 @@ import { CreateGatewayDto, Device, Gateway } from "types/global";
 
 export const gatewaysAPI = createApi({
   reducerPath: "gatewaysAPI",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_NODE }),
   tagTypes: ["Gateway", "Gateways", "Device", "Devices"],
   endpoints: (build) => ({
     fetchGateways: build.query<Gateway[], void>({
@@ -24,7 +24,7 @@ export const gatewaysAPI = createApi({
         method: "POST",
         body: gateway
       }),
-      invalidatesTags: ["Gateways"]
+      invalidatesTags: ["Gateway", "Gateways", "Device", "Devices"]
     }),
     addDeviceToGateway: build.mutation<Gateway, { gatewayId: string, body: { deviceId: string } }>({
       query: ({ gatewayId, body }) => ({
@@ -32,7 +32,7 @@ export const gatewaysAPI = createApi({
         method: "PUT",
         body: body
       }),
-      invalidatesTags: ["Gateways"]
+      invalidatesTags: ["Gateway", "Gateways", "Device", "Devices"]
     }),
     removeDeviceFromGateway: build.mutation<Gateway, { gatewayId: string, body: { deviceId: string } }>({
       query: ({ gatewayId, body }) => ({
@@ -40,14 +40,14 @@ export const gatewaysAPI = createApi({
         method: "PUT",
         body: body
       }),
-      invalidatesTags: ["Gateways"]
+      invalidatesTags: ["Gateway", "Gateways", "Device", "Devices"]
     }),
     deleteGateway: build.mutation<Device, string>({
       query: (id) => ({
         url: `/Gateways/${id}`,
         method: "DELETE"
       }),
-      invalidatesTags: ["Gateways"]
+      invalidatesTags: ["Gateway", "Gateways", "Device", "Devices"]
     })
   })
 });
