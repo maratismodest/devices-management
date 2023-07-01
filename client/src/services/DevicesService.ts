@@ -25,14 +25,13 @@ export const devicesAPI = createApi({
         body: device
       }),
       invalidatesTags: ["Devices"]
+    }),
+    deleteDevice: build.mutation<Device, string>({
+      query: (id) => ({
+        url: `/Devices/${id}`,
+        method: "DELETE"
+      }),
+      invalidatesTags: ["Devices"]
     })
-    // updateCompany: build.mutation<any, { id: number, body: any }>({
-    //   query: ({ id, body }) => ({
-    //     url: `/Companies/${id}`,
-    //     method: "PUT",
-    //     body
-    //   }),
-    //   invalidatesTags: ["Gateways"]
-    // })
   })
 });

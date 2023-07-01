@@ -21,13 +21,13 @@ export class GatewaysController {
   }
 
   @ApiResponse({ status: 200, type: Gateway })
-  @Put(":id")
+  @Put(":id/add")
   async addDevice(@Param("id") id: string, @Body() { deviceId }: { deviceId: string }) {
     return this.gatewaysService.addDevice(id, deviceId);
   }
 
   @ApiResponse({ status: 200, type: Gateway })
-  @Put(":id")
+  @Put(":id/remove")
   async removeDevice(@Param("id") id: string, @Body() { deviceId }: { deviceId: string }) {
     return this.gatewaysService.removeDevice(id, deviceId);
   }

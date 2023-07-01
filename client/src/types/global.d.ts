@@ -9,9 +9,15 @@
  * ---------------------------------------------------------------
  */
 
-export type CreateGatewayDto = object;
+export type CreateGatewayDto = {
+  sn: string;
+  name: string;
+  ip4: string;
+  devices: string[];
+};
 
 export interface Gateway {
+  _id: string;
   /**
    * Serial Number
    * @example "sn-123456"
@@ -58,6 +64,7 @@ export interface CreateDeviceDto {
 }
 
 export interface Device {
+  _id: string;
   /**
    * Uid
    * @example 123456
@@ -136,7 +143,7 @@ export class HttpClient<SecurityDataType = unknown> {
     credentials: "same-origin",
     headers: {},
     redirect: "follow",
-    referrerPolicy: "no-referrer",
+    referrerPolicy: "no-referrer"
   };
 
   constructor(apiConfig: ApiConfig<SecurityDataType> = {}) {
@@ -186,12 +193,12 @@ export class HttpClient<SecurityDataType = unknown> {
           property instanceof Blob
             ? property
             : typeof property === "object" && property !== null
-            ? JSON.stringify(property)
-            : `${property}`,
+              ? JSON.stringify(property)
+              : `${property}`
         );
         return formData;
       }, new FormData()),
-    [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
+    [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input)
   };
 
   protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
@@ -202,8 +209,8 @@ export class HttpClient<SecurityDataType = unknown> {
       headers: {
         ...(this.baseApiParams.headers || {}),
         ...(params1.headers || {}),
-        ...((params2 && params2.headers) || {}),
-      },
+        ...((params2 && params2.headers) || {})
+      }
     };
   }
 
@@ -231,16 +238,16 @@ export class HttpClient<SecurityDataType = unknown> {
   };
 
   public request = async <T = any, E = any>({
-    body,
-    secure,
-    path,
-    type,
-    query,
-    format,
-    baseUrl,
-    cancelToken,
-    ...params
-  }: FullRequestParams): Promise<HttpResponse<T, E>> => {
+                                              body,
+                                              secure,
+                                              path,
+                                              type,
+                                              query,
+                                              format,
+                                              baseUrl,
+                                              cancelToken,
+                                              ...params
+                                            }: FullRequestParams): Promise<HttpResponse<T, E>> => {
     const secureParams =
       ((typeof secure === "boolean" ? secure : this.baseApiParams.secure) &&
         this.securityWorker &&
@@ -255,10 +262,10 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {})
       },
       signal: cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal,
-      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
+      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body)
     }).then(async (response) => {
       const r = response as HttpResponse<T, E>;
       r.data = null as unknown as T;
@@ -267,18 +274,18 @@ export class HttpClient<SecurityDataType = unknown> {
       const data = !responseFormat
         ? r
         : await response[responseFormat]()
-            .then((data) => {
-              if (r.ok) {
-                r.data = data;
-              } else {
-                r.error = data;
-              }
-              return r;
-            })
-            .catch((e) => {
-              r.error = e;
-              return r;
-            });
+          .then((data) => {
+            if (r.ok) {
+              r.data = data;
+            } else {
+              r.error = data;
+            }
+            return r;
+          })
+          .catch((e) => {
+            r.error = e;
+            return r;
+          });
 
       if (cancelToken) {
         this.abortControllers.delete(cancelToken);
@@ -309,7 +316,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     this.request<void, any>({
       path: `/`,
       method: "GET",
-      ...params,
+      ...params
     });
 
   gateways = {
@@ -326,7 +333,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         type: ContentType.Json,
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -340,7 +347,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/gateways`,
         method: "GET",
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -354,7 +361,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/gateways/${id}`,
         method: "PUT",
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -368,7 +375,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/gateways/${id}`,
         method: "GET",
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -382,8 +389,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/gateways/${id}`,
         method: "DELETE",
         format: "json",
-        ...params,
-      }),
+        ...params
+      })
   };
   devices = {
     /**
@@ -400,7 +407,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         type: ContentType.Json,
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -415,7 +422,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/devices`,
         method: "GET",
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -430,7 +437,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/devices/${id}`,
         method: "GET",
         format: "json",
-        ...params,
+        ...params
       }),
 
     /**
@@ -445,7 +452,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/devices/${id}`,
         method: "DELETE",
         format: "json",
-        ...params,
-      }),
+        ...params
+      })
   };
 }
