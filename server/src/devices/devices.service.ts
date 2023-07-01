@@ -9,9 +9,10 @@ export class DevicesService {
   constructor(@InjectModel(Device.name) private readonly deviceModel: Model<Device>) {
   }
 
-  async create(createCatDto: CreateDeviceDto): Promise<Device> {
-    const createdCat = await this.deviceModel.create(createCatDto);
-    return createdCat;
+  async create(createDeviceDto: CreateDeviceDto): Promise<Device> {
+
+    const createdDevice = await this.deviceModel.create(createDeviceDto);
+    return createdDevice;
   }
 
   async findAll(): Promise<Device[]> {
@@ -23,9 +24,9 @@ export class DevicesService {
   }
 
   async delete(id: string) {
-    const deletedCat = await this.deviceModel
+    const deletedDevice = await this.deviceModel
       .findByIdAndRemove({ _id: id })
       .exec();
-    return deletedCat;
+    return deletedDevice;
   }
 }

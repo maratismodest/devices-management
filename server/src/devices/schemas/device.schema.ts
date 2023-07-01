@@ -19,3 +19,4 @@ export class Device {
 }
 
 export const DeviceSchema = SchemaFactory.createForClass(Device);
+DeviceSchema.index({ uid: 1 }, { unique: true });

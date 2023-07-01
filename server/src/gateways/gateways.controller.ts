@@ -1,29 +1,40 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { GatewaysService } from './gateways.service';
-import { CreateGatewayDto } from './dto/create-gateway.dto';
-import { Gateway } from './schemas/gateway.schema';
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import throwCustomError from "../utils/throwError";
+import { GatewaysService } from "./gateways.service";
+import { CreateGatewayDto } from "./dto/create-gateway.dto";
+import { Gateway } from "./schemas/gateway.schema";
 
-@Controller('gateways')
+@Controller("gateways")
 export class GatewaysController {
-  constructor(private readonly catsService: GatewaysService) {}
+  constructor(private readonly gatewaysService: GatewaysService) {
+  }
 
   @Post()
-  async create(@Body() createCatDto: CreateGatewayDto) {
-    await this.catsService.create(createCatDto);
+  async create(@Body() createGatewayDto: CreateGatewayDto) {
+    try {
+      await this.gatewaysService.create(createGatewayDto);
+    } catch (e) {
+      throwCustomError(e);
+    }
+  }
+
+  @Put(":id")
+  async addDevice(@Param("id") id: string, @Body() { deviceId }: { deviceId: string }) {
+    return this.gatewaysService.addDevice(id, deviceId);
   }
 
   @Get()
   async findAll(): Promise<Gateway[]> {
-    return this.catsService.findAll();
+    return this.gatewaysService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Gateway> {
-    return this.catsService.findOne(id);
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<Gateway> {
+    return this.gatewaysService.findOne(id);
   }
 
-  @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return this.catsService.delete(id);
+  @Delete(":id")
+  async delete(@Param("id") id: string) {
+    return this.gatewaysService.delete(id);
   }
 }

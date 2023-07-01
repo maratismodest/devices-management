@@ -13,6 +13,10 @@ export class Gateway {
 
   @Prop()
   ip4: string;
+
+  @Prop()
+  devices: string[];
 }
 
 export const GatewaySchema = SchemaFactory.createForClass(Gateway);
+GatewaySchema.index({ sn: 1 }, { unique: true });

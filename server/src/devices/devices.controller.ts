@@ -1,8 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import throwCustomError from "../utils/throwError";
 import { DevicesService } from "./devices.service";
 import { CreateDeviceDto } from "./dto/create-device.dto";
-import { Device, DeviceSchema } from "./schemas/device.schema";
+import { Device } from "./schemas/device.schema";
+
 
 @ApiTags("Devices")
 @Controller("devices")
@@ -12,7 +14,11 @@ export class DevicesController {
 
   @Post()
   async create(@Body() createDeviceDto: CreateDeviceDto) {
-    await this.devicesService.create(createDeviceDto);
+    try {
+      await this.devicesService.create(createDeviceDto);
+    } catch (err) {
+      throwCustomError(err);
+    }
   }
 
   @ApiResponse({ status: 200, type: CreateDeviceDto })
