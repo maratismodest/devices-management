@@ -2,27 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+    @apply min-h-screen flex flex-col
+}
+
 @layer base {
     header {
-        @apply p-4
+        @apply p-4 bg-blue-300
     }
 
     main {
-        @apply p-4
+        @apply p-4 flex-1
     }
 
     footer {
-        @apply p-4
+        @apply p-4 flex justify-center
+    }
+
+    h1 {
+        @apply text-2xl
+    }
+
+    h2 {
+        @apply text-xl
+    }
+
+    h3 {
+        @apply text-lg
+    }
+
+    h4 {
+        @apply text-base
+    }
+
+    h5, h6 {
+        @apply text-xs
     }
 
     input, select {
         @apply border border-gray-300 rounded px-2;
     }
 
-    /*select {*/
-    /*    @apply border border-gray-300 rounded px-2;*/
-    /*}*/
     button {
-        @apply text-white border !bg-indigo-500 rounded px-4 py-2 w-fit;
+        @apply text-white border !bg-indigo-500 rounded px-4 py-1 w-fit;
+    }
+
+    form {
+        @apply flex gap-2 flex-col items-center border py-4
+    }
+
+    li {
+        @apply truncate flex items-center
     }
 }

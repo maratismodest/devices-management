@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { devicesAPI } from "services/DevicesService";
 import { CreateDeviceDto } from "types/global";
+import RequiredError from "./RequiredError";
 
 type CreateDeviceForm = Omit<CreateDeviceDto, "date">
 
@@ -23,20 +24,19 @@ const CreateDevice = () => {
     createDevice(body).unwrap().then(() => reset()).catch(e => console.log("e", e));
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}
-          className="flex gap-2 flex-col items-center border p-8 mt-4">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Create Device</h2>
 
       <div className="grid">
         <label htmlFor="uid">Uid</label>
         <input id="uid" type="number" {...register("uid", { required: true })} />
-        {errors.uid && <span className="text-red-500">This field is required</span>}
+        {errors.uid && <RequiredError />}
       </div>
 
       <div className="grid">
         <label htmlFor="vendor">Vendor</label>
         <input id="vendor" {...register("vendor", { required: true })} />
-        {errors.vendor && <span className="text-red-500">This field is required</span>}
+        {errors.vendor && <RequiredError />}
       </div>
 
       <div className="flex justify-between gap-2">

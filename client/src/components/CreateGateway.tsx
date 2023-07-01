@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { CreateGatewayDto } from "types/global";
 import { gatewaysAPI } from "services/GatewaysService";
+import RequiredError from "./RequiredError";
 
 type CreateGatewayForm = Omit<CreateGatewayDto, "devices">
 
@@ -25,29 +26,28 @@ const CreateGateway = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}
-          className="flex gap-2 flex-col items-center border p-8 mt-4">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Create Gateway</h2>
 
       <div className="grid">
-        <label htmlFor="sn">Uid</label>
+        <label htmlFor="sn">Serial Number</label>
         <input id="sn"  {...register("sn", { required: true })} />
-        {errors.sn && <span className="text-red-500">This field is required</span>}
+        {errors.sn && <RequiredError />}
       </div>
 
       <div className="grid">
-        <label htmlFor="name">Vendor</label>
+        <label htmlFor="name">Name</label>
         <input id="name" {...register("name", { required: true })} />
-        {errors.name && <span className="text-red-500">This field is required</span>}
+        {errors.name && <RequiredError />}
       </div>
 
       <div className="grid">
-        <label htmlFor="ip4">ip4</label>
+        <label htmlFor="ip4">IP-address</label>
         <input id="ip4" {...register("ip4", { required: true })} />
-        {errors.ip4 && <span className="text-red-500">This field is required</span>}
+        {errors.ip4 && <RequiredError />}
       </div>
 
-      <button type="submit" className='mt-auto'>Create Gateway</button>
+      <button type="submit" className="mt-auto">Create Gateway</button>
     </form>
   );
 };
