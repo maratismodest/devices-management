@@ -18,16 +18,10 @@ export const store = configureStore({
     .concat(devicesAPI.middleware)
     .concat((api: MiddlewareAPI) => (next) => async (action) => {
       if (isRejectedWithValue(action)) {
-        const status = action.payload.status;
-        if (status && status === 403) {
-          console.log("403", action);
-          return alert("You do not have permit for the action!");
-        }
         console.log("action", action);
         console.warn("We got a rejected with value action!");
-        await alert(action.payload.data.detail || action.payload.data.errors.Comment[0] || action.payload.data.errors.Comment[0]);
+        await alert(action.payload.data.message || action.payload.data.detail || action.payload.data.errors.Comment[0] || action.payload.data.errors.Comment[0]);
       }
-
       return next(action);
     })
 });
