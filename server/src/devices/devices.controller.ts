@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Gateway } from "../gateways/schemas/gateway.schema";
 import throwCustomError from "../utils/throwError";
 import { DevicesService } from "./devices.service";
 import { CreateDeviceDto } from "./dto/create-device.dto";
@@ -12,6 +13,7 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {
   }
 
+  @ApiResponse({ status: 200, type: Device })
   @Post()
   async create(@Body() createDeviceDto: CreateDeviceDto) {
     try {
@@ -21,17 +23,19 @@ export class DevicesController {
     }
   }
 
-  @ApiResponse({ status: 200, type: CreateDeviceDto })
+  @ApiResponse({ status: 200, type: [Device] })
   @Get()
   async findAll(): Promise<Device[]> {
     return this.devicesService.findAll();
   }
 
+  @ApiResponse({ status: 200, type: Device })
   @Get(":id")
   async findOne(@Param("id") id: string): Promise<Device> {
     return this.devicesService.findOne(id);
   }
 
+  @ApiResponse({ status: 200, type: Device })
   @Delete(":id")
   async delete(@Param("id") id: string) {
     return this.devicesService.delete(id);

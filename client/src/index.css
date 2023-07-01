@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    header {
+        @apply p-4
+    }
+
+    main {
+        @apply p-4
+    }
+
+    footer {
+        @apply p-4
+    }
+}
