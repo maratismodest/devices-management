@@ -18,6 +18,8 @@ cd client
 npm install
 npm run start
 
+http://localhost:3000
+
 ###Stack: 
 * React,
 * Typescript,
