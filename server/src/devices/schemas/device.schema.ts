@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsInt, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsInt, IsNotEmpty, IsString } from "class-validator";
 import { HydratedDocument } from "mongoose";
 
 export type DeviceDocument = HydratedDocument<Device>;

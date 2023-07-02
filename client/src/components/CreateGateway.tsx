@@ -19,9 +19,7 @@ const CreateGateway = () => {
   const [createGateway] = gatewaysAPI.useCreateGatewayMutation();
 
   const onSubmit = (data: CreateGatewayForm) => {
-    console.log(data);
     const body = { ...data, devices: [] };
-    console.log("body", body);
     createGateway(body).unwrap().then(() => reset()).catch(e => console.log("e", e));
   };
 

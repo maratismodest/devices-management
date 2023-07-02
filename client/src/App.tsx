@@ -5,7 +5,7 @@ import React, { Suspense } from "react";
 import Devices from "./components/Devices";
 import Gateways from "./components/Gateways";
 import RemoveDeviceFromGateway from "./components/RemoveDeviceFromGateway";
-import Spinner from "./components/Spinner";
+import Spinner from "./ui/Spinner";
 import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 

@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
-import { ApiResponse } from "@nestjs/swagger";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import throwCustomError from "../utils/throwError";
 import { GatewaysService } from "./gateways.service";
 import { CreateGatewayDto } from "./dto/create-gateway.dto";
 import { Gateway } from "./schemas/gateway.schema";
 
+@ApiTags("Gateways")
 @Controller("gateways")
 export class GatewaysController {
   constructor(private readonly gatewaysService: GatewaysService) {

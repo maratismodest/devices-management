@@ -1,11 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Gateway } from "../gateways/schemas/gateway.schema";
 import throwCustomError from "../utils/throwError";
 import { DevicesService } from "./devices.service";
 import { CreateDeviceDto } from "./dto/create-device.dto";
 import { Device } from "./schemas/device.schema";
-
 
 @ApiTags("Devices")
 @Controller("devices")

@@ -1,9 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { gatewaysAPI } from "services/GatewaysService";
 import { devicesAPI } from "services/DevicesService";
-import { Device } from "../types/global";
-import Devices from "./Devices";
+import { gatewaysAPI } from "services/GatewaysService";
+import { Device } from "types/global";
 import RequiredError from "./RequiredError";
 
 export interface AddDeviceToGatewayForm {
@@ -24,9 +23,6 @@ const AddDeviceToGateway = () => {
     const [addDeviceToGateway] = gatewaysAPI.useAddDeviceToGatewayMutation();
 
     const onSubmit = (data: AddDeviceToGatewayForm) => {
-      console.log(data);
-      const body = { ...data, devices: [] };
-      console.log("body", body);
       addDeviceToGateway({
         gatewayId: data.gatewayId,
         body: { deviceId: data.deviceId }

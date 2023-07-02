@@ -24,7 +24,6 @@ const RemoveDeviceFromGateway = () => {
     const [removeDeviceFromGateway] = gatewaysAPI.useRemoveDeviceFromGatewayMutation();
 
     const onSubmit = (data: RemoveDeviceFromGatewayForm) => {
-      console.log(data);
       removeDeviceFromGateway({
         gatewayId: data.gatewayId,
         body: { deviceId: data.deviceId }

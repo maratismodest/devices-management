@@ -12,7 +12,9 @@ import { GatewaysModule } from "./gateways/gateways.module";
     ConfigModule.forRoot({
       envFilePath: ".env"
     }),
-    MongooseModule.forRoot(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@maratismodest.1lt9ibq.mongodb.net/?retryWrites=true&w=majority`), GatewaysModule, DevicesModule],
+    MongooseModule.forRoot(`mongodb+srv://${process.env.DB_LOGIN}:${process.env.DB_PASSWORD}@maratismodest.1lt9ibq.mongodb.net/?retryWrites=true&w=majority`),
+    GatewaysModule,
+    DevicesModule],
   controllers: [AppController],
   providers: [AppService]
 })

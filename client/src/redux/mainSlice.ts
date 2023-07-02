@@ -23,6 +23,6 @@ export const mainSlice = createSlice({
   }
 });
 
-export const {} = mainSlice.actions;
+export const { setError, isLoading } = mainSlice.actions;
 
 export default mainSlice.reducer;

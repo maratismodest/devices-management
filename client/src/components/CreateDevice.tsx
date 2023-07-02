@@ -18,9 +18,7 @@ const CreateDevice = () => {
 
   const [createDevice] = devicesAPI.useCreateDeviceMutation();
   const onSubmit = (data: CreateDeviceForm) => {
-    console.log(data);
     const body = { ...data, uid: Number(data.uid), date: +new Date() };
-    console.log("body", body);
     createDevice(body).unwrap().then(() => reset()).catch(e => console.log("e", e));
   };
   return (

@@ -10,11 +10,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-    .setTitle("Example")
-    .setDescription("The example API description")
-    .setExternalDoc("swagger-spec.json", "http://localhost:8080/api-json")
+    .setTitle("Device management")
+    .setDescription("You can download interfaces via the below link")
+    .setExternalDoc("swagger-spec.json", process.env.BASE_URL + "/api-json")
     .setVersion("1.0")
-    .addTag("example")
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
