@@ -1,13 +1,13 @@
+import React, { Suspense } from "react";
+import Footer from "layout/Footer";
+import Header from "layout/Header";
 import AddDeviceToGateway from "components/AddDeviceToGateway";
 import CreateDevice from "components/CreateDevice";
 import CreateGateway from "components/CreateGateway";
-import React, { Suspense } from "react";
-import Devices from "./components/Devices";
-import Gateways from "./components/Gateways";
-import RemoveDeviceFromGateway from "./components/RemoveDeviceFromGateway";
-import Spinner from "./ui/Spinner";
-import Footer from "./layout/Footer";
-import Header from "./layout/Header";
+import Devices from "components/Devices";
+import Gateways from "components/Gateways";
+import RemoveDeviceFromGateway from "components/RemoveDeviceFromGateway";
+import Spinner from "ui/Spinner";
 
 function App() {
 

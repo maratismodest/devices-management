@@ -1,7 +1,7 @@
 import React from "react";
 import { devicesAPI } from "services/DevicesService";
 import getDateByTimestamp from "utils/getDateByTimestamp";
-import Spinner from "../ui/Spinner";
+import Spinner from "ui/Spinner";
 
 const Devices = () => {
     const { data: devices = [], isLoading } = devicesAPI.useFetchDevicesQuery();

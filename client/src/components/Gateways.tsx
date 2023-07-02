@@ -1,8 +1,7 @@
 import React from "react";
-import { gatewaysAPI } from "services/GatewaysService";
 import { devicesAPI } from "services/DevicesService";
-import { Device } from "../types/global";
-import Spinner from "../ui/Spinner";
+import { gatewaysAPI } from "services/GatewaysService";
+import Spinner from "ui/Spinner";
 
 const Gateways = () => {
   const { data: gateways = [], isLoading } = gatewaysAPI.useFetchGatewaysQuery();
