@@ -2,13 +2,18 @@ import React from "react";
 import { devicesAPI } from "services/DevicesService";
 import { gatewaysAPI } from "services/GatewaysService";
 import Spinner from "ui/Spinner";
+import { PageError } from "widgets/PageError/ui/PageError";
 
 const Gateways = () => {
-  const { data: gateways = [], isLoading } = gatewaysAPI.useFetchGatewaysQuery();
-  const { data = [] } = devicesAPI.useFetchDevicesQuery();
+  const { data: gateways, isLoading } = gatewaysAPI.useFetchGatewaysQuery();
+  const { data: apiDevices, isLoading: devicesLoading } = devicesAPI.useFetchDevicesQuery();
 
-  if (isLoading) {
+  if (isLoading || devicesLoading) {
     return <Spinner />;
+  }
+
+  if (!gateways || !apiDevices) {
+    return <PageError />
   }
 
   return (
@@ -25,7 +30,7 @@ const Gateways = () => {
                   <select className="w-full">
                     <option value="" selected disabled>View Devices</option>
                     {devices.map((_id) => {
-                      const _device = data.find(x => x._id === _id);
+                      const _device = apiDevices.find(x => x._id === _id);
                       if (!_device) {
                         return null;
                       }

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
+import { ErrorBoundary } from "providers/ErrorBoundary";
 import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(
@@ -10,8 +11,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
